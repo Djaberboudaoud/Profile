@@ -62,7 +62,7 @@ const Contact = () => {
             <ContactInfo>
               <LocationOnIcon />
               <Typography variant="body1">
-                Adrar, Algeria
+                Sidi Bel Abbes, Algeria
               </Typography>
             </ContactInfo>
 
