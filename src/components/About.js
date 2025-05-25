@@ -40,7 +40,7 @@ const About = () => {
               Personal Information
             </Typography>
             <Typography paragraph>
-              I am a 21-year-old Software Engineer based in Adrar, Algeria. Currently, I am pursuing my studies at the School of Informatics in Sidi Bel Abbess, Algeria, where I am in my 4th year.
+              I am a 21-year-old Software Engineer based in Sidi Bel Abbes, Algeria. Currently, I am pursuing my studies at the School of Informatics in Sidi Bel Abbess, Algeria, where I am in my 4th year.
             </Typography>
             <Typography paragraph>
               My passion lies in web development, deep learning, machine learning, and data science. I am constantly expanding my knowledge and skills in these areas to create innovative solutions.
@@ -60,7 +60,7 @@ const About = () => {
               <strong>Email:</strong> d.boudaoud@esi-sba.dz
             </Typography>
             <Typography paragraph>
-              <strong>Location:</strong> Adrar, Algeria
+              <strong>Location:</strong> Sidi Bel Abbes, Algeria
             </Typography>
           </StyledPaper>
         </Grid>
