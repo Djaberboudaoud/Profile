@@ -52,7 +52,7 @@ const Contact = () => {
               allowFullScreen=""
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
-              title="Adrar, Algeria Location"
+              title="Sidi Bel abbés, Algeria Location"
             />
           </MapContainer>
         </Grid>
