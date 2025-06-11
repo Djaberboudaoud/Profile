@@ -36,7 +36,7 @@ const Contact = () => {
   };
 
   return (
-    <ContactContainer maxWidth="lg">
+    <ContactContainer id="contact" maxWidth="lg">
       <Typography variant="h3" component="h2" gutterBottom align="center" color="primary" sx={{ mb: 6 }}>
         Contact Me
       </Typography>
@@ -96,4 +96,4 @@ const Contact = () => {
   );
 };
 
-export default Contact; 
+export default Contact;

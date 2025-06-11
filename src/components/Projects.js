@@ -144,7 +144,7 @@ const Projects = () => {
   };
 
   return (
-    <ProjectsSection>
+    <ProjectsSection id="projects">
       <ProjectGrid>
         {projects.map((project, index) => (
           <ProjectCard

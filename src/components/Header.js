@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import styled from 'styled-components';
-import { TouchableItem } from './TouchableItem';
 
 const HeaderContainer = styled(motion.header)`
   position: fixed;
@@ -72,6 +71,7 @@ const MenuLink = styled(motion.a)`
   color: #333;
   font-weight: 500;
   padding: 0.5rem 1rem;
+  cursor: pointer;
   
   &:hover {
     color: #007bff;
@@ -81,11 +81,27 @@ const MenuLink = styled(motion.a)`
 const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
+  const handleNavClick = (e, id) => {
+    e.preventDefault();
+    const element = document.getElementById(id);
+    if (element) {
+      const headerOffset = 80; // Height of your fixed header
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth"
+      });
+      
+      setIsMobileMenuOpen(false);
+    }
+  };
+
   const menuItems = [
-    { title: 'Home', href: '#home' },
-    { title: 'About', href: '#about' },
-    { title: 'Projects', href: '#projects' },
-    { title: 'Contact', href: '#contact' }
+    { title: 'About', id: 'about' },
+    { title: 'Projects', id: 'projects' },
+    { title: 'Contact', id: 'contact' }
   ];
 
   return (
@@ -95,20 +111,18 @@ const Header = () => {
       transition={{ duration: 0.5 }}
     >
       <NavContainer>
-        <TouchableItem onPress={() => window.scrollTo(0, 0)}>
-          <motion.h1
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            DJ
-          </motion.h1>
-        </TouchableItem>
+        <motion.div
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+        >
+          <MenuLink onClick={(e) => handleNavClick(e, 'home')}>DJ</MenuLink>
+        </motion.div>
 
         <div className="desktop-menu">
           {menuItems.map((item) => (
             <MenuLink
-              key={item.title}
-              href={item.href}
+              key={item.id}
+              onClick={(e) => handleNavClick(e, item.id)}
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
             >
@@ -136,12 +150,11 @@ const Header = () => {
             <ul>
               {menuItems.map((item) => (
                 <motion.li
-                  key={item.title}
+                  key={item.id}
                   whileTap={{ scale: 0.95 }}
                 >
                   <MenuLink
-                    href={item.href}
-                    onClick={() => setIsMobileMenuOpen(false)}
+                    onClick={(e) => handleNavClick(e, item.id)}
                   >
                     {item.title}
                   </MenuLink>
