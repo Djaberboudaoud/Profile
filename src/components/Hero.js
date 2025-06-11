@@ -1,91 +1,109 @@
-import React, { useState } from 'react';
-import { Box, Typography, Container } from '@mui/material';
+import React from 'react';
 import { motion } from 'framer-motion';
 import styled from 'styled-components';
+import { useTouch } from '../hooks/useTouch';
 
-const LampContainer = styled(Box)`
-  position: relative;
-  height: 100vh;
+const HeroContainer = styled(motion.section)`
+  min-height: 100vh;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-`;
-
-const Lamp = styled(motion.div)`
-  width: 60px;
-  height: 60px;
-  background: ${props => props.isOn ? '#FFD700' : '#666'};
-  border-radius: 50%;
-  position: absolute;
-  top: 20%;
-  box-shadow: ${props => props.isOn ? '0 0 50px #FFD700' : 'none'};
-  transition: all 0.3s ease;
-`;
-
-const String = styled(motion.div)`
-  width: 4px;
-  height: 200px;
-  background: #333;
-  position: absolute;
-  top: 20%;
-  cursor: pointer;
-  transform-origin: top;
+  position: relative;
+  overflow: hidden;
+  padding: 20px;
+  
+  @media (max-width: 768px) {
+    padding: 16px;
+    text-align: center;
+  }
 `;
 
 const ProfileImage = styled(motion.img)`
-  width: 300px;
-  height: 300px;
+  width: 200px;
+  height: 200px;
   border-radius: 50%;
   object-fit: cover;
-  margin-top: 100px;
-  filter: ${props => props.isOn ? 'brightness(1)' : 'brightness(0.7)'};
-  transition: all 0.3s ease;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+  margin-bottom: 2rem;
+  
+  @media (max-width: 768px) {
+    width: 150px;
+    height: 150px;
+  }
+`;
+
+const HeroContent = styled(motion.div)`
+  max-width: 600px;
+  text-align: center;
+
+  h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    background: linear-gradient(45deg, #007bff, #00ff88);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    
+    @media (max-width: 768px) {
+      font-size: 2rem;
+    }
+  }
+  
+  p {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    color: #666;
+    margin-bottom: 2rem;
+    
+    @media (max-width: 768px) {
+      font-size: 1rem;
+    }
+  }
 `;
 
 const Hero = () => {
-  const [isLampOn, setIsLampOn] = useState(false);
-
-  const handleStringPull = () => {
-    setIsLampOn(!isLampOn);
-  };
+  const { touchState, handleTouchStart, handleTouchMove, handleTouchEnd } = useTouch();
 
   return (
-    <LampContainer>
-      <Lamp 
-        isOn={isLampOn}
-        animate={{ 
-          scale: isLampOn ? 1.2 : 1,
-          y: isLampOn ? -10 : 0
+    <HeroContainer
+      initial={{ opacity: 0, y: 50 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8 }}
+      onTouchStart={handleTouchStart}
+      onTouchMove={handleTouchMove}
+      onTouchEnd={handleTouchEnd}
+    >
+      <motion.div
+        style={{
+          transform: touchState.isTouching 
+            ? `translate(${touchState.moveX * 0.1}px, ${touchState.moveY * 0.1}px)` 
+            : 'none'
         }}
-      />
-      <String
-        onClick={handleStringPull}
-        animate={{
-          rotate: isLampOn ? 5 : 0
-        }}
-      />
-      <ProfileImage
-        src="/profile.jpg"
-        alt="BOUDAOUD DJABER"
-        isOn={isLampOn}
-        initial={{ opacity: 0, y: 50 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-      />
-      <Container maxWidth="md" sx={{ textAlign: 'center', mt: 4 }}>
-        <Typography variant="h2" component="h1" gutterBottom>
-          BOUDAOUD DJABER
-        </Typography>
-        <Typography variant="h5" color="primary" gutterBottom>
-          Software Engineer
-        </Typography>
-        <Typography variant="subtitle1" color="text.secondary">
-          Web Development | Deep Learning | Machine Learning | Data Science
-        </Typography>
-      </Container>
-    </LampContainer>
+      >
+        <ProfileImage
+          src="/profile.jpg"
+          alt="Profile"
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+        />
+        <HeroContent>
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+          >
+            BOUDAOUD DJABER
+          </motion.h1>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4 }}
+          >
+            Software Engineer
+          </motion.p>
+        </HeroContent>
+      </motion.div>
+    </HeroContainer>
   );
 };
 
-export default Hero; 
+export default Hero;

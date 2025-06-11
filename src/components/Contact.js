@@ -52,7 +52,7 @@ const Contact = () => {
               allowFullScreen=""
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
-              title="Sidi Bel abbés, Algeria Location"
+              title="َAdrar, Algeria Location"
             />
           </MapContainer>
         </Grid>
@@ -62,7 +62,7 @@ const Contact = () => {
             <ContactInfo>
               <LocationOnIcon />
               <Typography variant="body1">
-                Sidi Bel Abbes, Algeria
+                Adrar, Algeria
               </Typography>
             </ContactInfo>
 

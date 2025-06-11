@@ -2,6 +2,11 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
@@ -11,15 +16,48 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  scroll-behavior: smooth;
+  overflow-x: hidden;
+  touch-action: manipulation;
 }
 
-html {
-  scroll-behavior: smooth;
+/* Mobile optimizations */
+@media (max-width: 768px) {
+  html {
+    font-size: 14px;
+  }
+
+  input, 
+  textarea, 
+  button {
+    font-size: 16px; /* Prevents iOS zoom on focus */
+  }
 }
 
-#root {
-  min-height: 100vh;
+/* Smooth scrolling for iOS */
+@supports (-webkit-touch-callout: none) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* Remove pull-to-refresh on mobile */
+body {
+  overscroll-behavior-y: contain;
+}
+
+/* Better touch targets for mobile */
+button,
+a,
+input[type="button"],
+input[type="submit"] {
+  min-height: 44px;
+  min-width: 44px;
+}
+
+/* Optimize images */
+img {
+  max-width: 100%;
+  height: auto;
 }
 
 /* Custom scrollbar */
@@ -38,4 +76,4 @@ html {
 
 ::-webkit-scrollbar-thumb:hover {
   background: #FFC000;
-} 
+}

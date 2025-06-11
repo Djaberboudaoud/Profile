@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
+import { AnimatedComponent } from './components/AnimatedComponent';
+import { TouchableItem } from './components/TouchableItem';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import About from './components/About';
@@ -39,19 +41,25 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Box sx={{ 
-        minHeight: '100vh',
-        background: isDarkMode ? 'linear-gradient(45deg, #121212 30%, #1e1e1e 90%)' : 
-                               'linear-gradient(45deg, #ffffff 30%, #f5f5f5 90%)',
-      }}>
-        <Header isDarkMode={isDarkMode} toggleTheme={toggleTheme} />
-        <Hero />
-        <About />
-        <Projects />
-        <Contact />
-      </Box>
+      <AnimatedComponent>
+        <TouchableItem>
+          <Box sx={{ 
+            minHeight: '100vh',
+            background: isDarkMode ? 'linear-gradient(45deg, #121212 30%, #1e1e1e 90%)' : 
+                                   'linear-gradient(45deg, #ffffff 30%, #f5f5f5 90%)',
+          }}>
+            <Header isDarkMode={isDarkMode} toggleTheme={toggleTheme} />
+            <main>
+              <Hero />
+              <About />
+              <Projects />
+              <Contact />
+            </main>
+          </Box>
+        </TouchableItem>
+      </AnimatedComponent>
     </ThemeProvider>
   );
 }
 
-export default App; 
+export default App;
